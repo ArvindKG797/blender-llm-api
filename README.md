@@ -7,32 +7,50 @@ Fine-tuned Blender Python (BPY) code generation API using:
 * FastAPI Backend
 * Hugging Face Transformers
 
+### Fine-Tuning Method
 
-## Recommended Environment
+QLoRA
 
-Python Version:
+### Adapter
 
-```text
+checkpoint-2109/
+
+### Purpose
+
+Generate Blender Python (BPY) scripts from natural language instructions.
+
+---
+
+## Tested Environment
+
+### Python
+
 Python 3.11.9
-```
 
-GPU:
+### GPU
 
-```text
-NVIDIA GPU recommended
-```
-
-Tested Hardware:
-
-```text
 NVIDIA T400 4GB
+
+### CUDA
+
+CUDA 12.1
+
+### PyTorch
+
+Torch 2.5.1+cu121
+
+---
+
+## Clone Repository
+
+```bash
+git clone https://github.com/ArvindKG797/blender-llm-api.git
+cd blender-llm-api
 ```
 
 ---
 
-## Setup
-
-Create a virtual environment:
+## Create Virtual Environment
 
 ```bash
 py -3.11 -m venv venv
@@ -44,64 +62,44 @@ Activate:
 venv\Scripts\activate
 ```
 
-Install dependencies:
+Verify:
 
 ```bash
-pip install -r requirements.txt
+python --version
 ```
 
----
-
-## Important
-
-This project was tested using:
+Expected:
 
 ```text
-Python 3.11.9
-CUDA 12.1
-Torch 2.5.1
+Python 3.11.x
 ```
-
-Python 3.14 is NOT recommended and may cause package installation issues.
-
-
-## Requirements
-
-* NVIDIA GPU recommended
-* Internet connection for first run (downloads base model from Hugging Face)
 
 ---
 
-## Setup
+## Install CUDA PyTorch
 
-### Clone Repository
-
-```bash
-git clone https://github.com/ArvindKG797/blender-llm-api.git
-cd blender-llm-api
-```
-
-### Create Virtual Environment
+Install the GPU-enabled version first:
 
 ```bash
-python -m venv venv
+pip install torch==2.5.1+cu121 torchvision==0.20.1+cu121 torchaudio==2.5.1+cu121 --index-url https://download.pytorch.org/whl/cu121
 ```
 
-Activate:
-
-Windows:
+Verify:
 
 ```bash
-venv\Scripts\activate
+python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
 ```
 
-Linux:
+Expected:
 
-```bash
-source venv/bin/activate
+```text
+2.5.1+cu121
+True
 ```
 
-### Install Dependencies
+---
+
+## Install Remaining Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -115,16 +113,16 @@ pip install -r requirements.txt
 uvicorn api:app --reload
 ```
 
-If successful:
+Expected:
 
 ```text
+Loading model...
 Model Ready!
-Uvicorn running on http://127.0.0.1:8000
 ```
 
 ---
 
-## Open Swagger UI
+## Swagger API Documentation
 
 Open:
 
@@ -138,45 +136,39 @@ http://127.0.0.1:8000/docs
 
 ```json
 {
-  "prompt": "Generate BPY code to create stairs using cubes"
-}
-```
-
-Example Response:
-
-```json
-{
-  "response": "import bpy\nfor i in range(10): ..."
+  "prompt": "Generate BPY code to create a staircase using cubes"
 }
 ```
 
 ---
 
-## Model Information
-
-Base Model:
+## Repository Structure
 
 ```text
-Qwen/Qwen2.5-Coder-1.5B-Instruct
-```
-
-Fine-Tuning:
-
-```text
-QLoRA
-```
-
-Adapter Location:
-
-```text
-checkpoint-2109/
+blender-llm-api/
+│
+├── api.py
+├── requirements.txt
+├── test_trained_model.py
+├── README.md
+│
+└── checkpoint-2109/
+    ├── adapter_config.json
+    ├── adapter_model.safetensors
+    ├── tokenizer.json
+    ├── tokenizer_config.json
+    └── training_args.bin
 ```
 
 ---
 
 ## Notes
 
-The repository contains only the trained LoRA adapter.
+* The repository contains only the LoRA adapter.
+* The base model is automatically downloaded from Hugging Face on first run.
+* Internet access is required during the first launch.
+* Subsequent runs use the cached model locally.
+* Python 3.14 is not recommended.
+* Python 3.11.9 is the tested environment.
 
-The base model is automatically downloaded from Hugging Face during first launch.
-
+---
