@@ -118,4 +118,61 @@ The repository contains only the trained LoRA adapter.
 
 The base model is automatically downloaded from Hugging Face during first launch.
 
+## Recommended Environment
+
+Python Version:
+
+```text
+Python 3.11.9
+```
+
+GPU:
+
+```text
+NVIDIA GPU recommended
+```
+
+Tested Hardware:
+
+```text
+NVIDIA T400 4GB
+```
+
+---
+
+## Setup
+
+Create a virtual environment:
+
+```bash
+py -3.11 -m venv venv
+```
+
+Activate:
+
+```bash
+venv\Scripts\activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Important
+
+This project was tested using:
+
+```text
+Python 3.11.9
+CUDA 12.1
+Torch 2.5.1
+```
+
+Python 3.14 is NOT recommended and may cause package installation issues.
+
+
 Subsequent runs use the locally cached model.
