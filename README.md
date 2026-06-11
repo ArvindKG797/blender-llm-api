@@ -1,6 +1,12 @@
 # Blender LLM API
 
-Local API for generating Blender Python (BPY) code using a fine-tuned Qwen 2.5 Coder model with a LoRA adapter.
+Fine-tuned Blender Python (BPY) code generation API using:
+
+* Qwen2.5-Coder-1.5B-Instruct
+* QLoRA Fine-Tuning
+* FastAPI Backend
+* Hugging Face Transformers
+
 
 ## Recommended Environment
 
